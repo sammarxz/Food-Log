@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block pageTitle %}{{ super() }} Início{% endblock %}
+{% block content %}
+    <header class="header bg--yellow p--relative">
+        <div class="container--lg">
+            <nav class="header__nav p--fixed">
+                <select name="navByDay" id="navByDay" onchange="this.options[this.selectedIndex].value && (window.location = `&day=${this.options[this.selectedIndex].value}`);">
+                    {% for r in all_results %}
+                        <option value="{{ r.date }}" {% if r.date == actual_day %}selected{% endif %}>
+                            {{ r.entry_date }}
+                        </option>
+                    {% endfor %}
+                </select>
+                <ul class="header__nav__list">
+                    <li class="d--inline">
+                        <form action="{{ url_for('index') }}" method="POST" class="d--inline">
+                            <input type="text" name="date" id="date" hidden>
+                            <button type="submit">Adicionar Dia</button>
+                        </form>
+                    </li>
+                    <li class="d--inline"><a href="{{ url_for('foods') }}">Comidas</a></li>
+                </ul>
+            </nav>
+            <h1 class="header__title txt--center fs--normal">
+                Calorias:
+                <span class="fs--title ff--secondary d--block no--select">{{ day_info.calories }}</span>
+            </h1>
+            <aside class="header__panel bg--white p--absolute">
+                <div class="header__panel__item txt--center">
+                    <h2>{{ day_info.protein }}g<br><span class="fs--normal">Proteína</span></h2>
+                </div>
+                <div class="header__panel__item txt--center">
+                    <h2>{{ day_info.carbos }}g<br><span class="fs--normal">Carbos</span></h2>
+                </div>
+                <div class="header__panel__item txt--center">
+                    <h2>{{ day_info.fat }}g<br><span class="fs--normal">Gordura</span></h2>
+                </div>
+                <div class="header__panel__item txt--center">
+                    <a href="{{ url_for('day', date=day_info.day) }}" class="cta btn btn--default btn--full">Detalhes</a>
+                </div>
+            </aside>
+        </div>
+    </header>
+{% endblock %}
+
+{% block script %}
+    <script>
+        const actualDate = new Date();
+
+        const day = actualDate.getDate();
+        const month = actualDate.getMonth()+1 < 10 ? `0${actualDate.getMonth()+1}` : actualDate.getMonth()+1
+        const year = actualDate.getFullYear();
+
+        document.querySelector("#date").value = `${year}-${month}-${day}`;
+    </script>
+{% endblock %}

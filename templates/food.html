@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block pageTitle %}{{ super() }} Comidas{% endblock %}
+{% block content %}
+    <header class="header bg--green p--relative">
+        <nav class="header__nav p--fixed">
+            <a href="{{ url_for('index') }}">🠐 Início</a>
+        </nav>
+        <form action="{{ url_for('foods') }}" method="POST" class="addFoodForm txt--center">
+            <input type="text" id="name" name="food" class="header__title ff--secondary fs--subtitle" placeholder="Nome da comida" required>
+
+            <aside class="header__panel bg--white p--absolute">
+                <div class="header__panel__item txt--center">
+                    <input type="number" placeholder="00" id="protein" name="protein" required>
+                    <label for="protein">Proteína</label>
+                </div>
+                <div class="header__panel__item txt--center">
+                    <input type="number" placeholder="00" id="carbs" name="carbs" required>
+                    <label for="carbs">Carbos</label>
+                </div>
+                <div class="header__panel__item txt--center">
+                    <input type="number" placeholder="00" id="fat" name="fat" required>
+                    <label for="fat">Gordura</label>
+                </div>
+                <div class="header__panel__item txt--center">
+                    <button type="submit" class="cta btn btn--default btn--full">Adicionar</button>
+                </div>
+            </aside>
+        </form>
+    </header>
+    <section class="pos-header section">
+        <div class="container--lg">
+            <h2 class="section__title txt--center">Comidas Cadastradas</h2>
+            {% if results %}
+                <ul class="food-list">
+                {% for food in results %}
+                    <li class="food-list__item">
+                        <h3>{{ food.name }}</h3>
+                        <ul class="food-list__item__info">
+                            <li>
+                                <h4>{{ food.protein }}g Proteína</h4>
+                            </li>
+                            <li>
+                                <h4>{{ food.carbos }}g Carbos</h4>
+                            </li>
+                            <li>
+                                <h4>{{ food.fat }}g Gordura</h4>
+                            </li>
+                            <li>
+                                <h4>{{ food.calories }} kcal</h4>
+                            </li>
+                        </ul>
+                    </li>
+                {% endfor %}
+                </ul>
+            {% else %}
+                <h3 class="txt--center">Nenhuma comida cadastrada :(</h3>
+            {% endif %}
+        </div>
+    </section>
+{% endblock %}

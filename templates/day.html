@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block pageTitle %}{{ super() }} Início{% endblock %}
+{% block content %}
+    <header class="header bg--red p--relative">
+        <div class="container--lg">
+            <nav class="header__nav p--fixed">
+                <a href="{{ url_for('index') }}">🠐 Início</a>
+                <a href="{{ url_for('foods') }}">Comidas</a>
+            </nav>
+            <h1 class="header__title txt--center fs--normal">
+                 Calorias:
+                <span class="fs--title ff--secondary d--block no--select">{{ totals.calories }}</span>
+            </h1>
+            <aside class="header__panel bg--white p--absolute">
+                <div class="header__panel__item txt--center">
+                    <h2>{{ totals.protein }}g<br><span class="fs--normal">Proteína</span></h2>
+                </div>
+                <div class="header__panel__item txt--center">
+                    <h2>{{ totals.carbos }}g<br><span class="fs--normal">Carbos</span></h2>
+                </div>
+                <div class="header__panel__item txt--center">
+                    <h2>{{ totals.fat }}g<br><span class="fs--normal">Gordura</span></h2>
+                </div>
+            </aside>
+        </div>
+    </header>
+    <section class="pos-header section">
+        <div class="container--lg">
+            <h2 class="section__title txt--center">Comidas</h2>
+            <form class="food-form" action="{{ url_for('day', date=entry_date) }}" method="POST">
+                <select name="food_select" id="food_select" required>
+                    {% for food in food_results %}
+                        <option value="{{ food.id }}">{{ food.name }}</option>
+                    {% endfor %}
+                </select>
+                <button type="submit" class="btn btn--default">Adicionar</button>
+            </form>
+            {% if log_results %}
+                <ul class="food-list">
+                {% for food in log_results %}
+                    <li class="food-list__item">
+                        <h3>{{ food.name }}</h3>
+                        <ul class="food-list__item__info">
+                            <li>
+                                <h4>{{ food.protein }}g Proteína</h4>
+                            </li>
+                            <li>
+                                <h4>{{ food.carbos }}g Carbos</h4>
+                            </li>
+                            <li>
+                                <h4>{{ food.fat }}g Gordura</h4>
+                            </li>
+                            <li>
+                                <h4>{{ food.calories }} kcal</h4>
+                            </li>
+                        </ul>
+                    </li>
+                {% endfor %}
+                </ul>
+            {% else %}
+                <h3 class="txt--center">Você não comeu nada ainda?</h3>
+            {% endif %}
+        </div>
+    </section>
+{% endblock %}

@@ -1,0 +1,427 @@
+/*
+* === FONTS ===
+*/
+
+@font-face {
+    font-family: 'Monument Extended';
+    src: url('../fonts/monumentextended-regular.woff2') format('woff2'),
+         url('../fonts/monumentextended-regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'PM Grotesk';
+    src: url('../fonts/pmgrotesk-regular.woff2') format('woff2'),
+         url('../fonts/pmgrotesk-regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'PM Grotesk';
+    src: url('../fonts/pmgrotesk-medium.woff2') format('woff2'),
+         url('../fonts/pmgrotesk-medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'PM Grotesk';
+    src: url('../fonts/pmgrotesk-bold.woff2') format('woff2'),
+         url('../fonts/pmgrotesk-bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+
+
+/*
+* === GERAL ===
+*/
+
+*,
+*:before,
+*:after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --green: #06a650;
+    --red: #eb574d;
+    --yellow: #f9c92b;
+}
+
+body {  
+    color: #000;
+    font-family: 'PM Grotesk',  serif;
+    font-weight: 400;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+ul,
+ol {
+    list-style: none
+}
+
+h1, h2, h3, h4, h5 {
+    line-height: 1;
+}
+
+a {
+    color: currentColor;
+    text-decoration: none;
+}
+
+input,
+select,
+button {
+    background: transparent;
+    border: none;
+    outline: none;
+    font: inherit;
+}
+
+input {
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+label {
+    display: block;
+}
+
+button {
+    cursor: pointer;
+}
+
+::-webkit-input-placeholder {
+    color: rgba(0,0,0,.4);
+}
+
+:-ms-input-placeholder {
+    color: rgba(0,0,0,.4);
+}
+
+::placeholder {
+    color: rgba(0,0,0,.4);
+}
+
+
+/*
+* === LAYOUT ===
+*/
+
+.section {
+    margin-bottom: 4vw;
+}
+
+.container--lg,
+.container--sm {
+    margin: 0 auto;
+}
+
+.container--lg {
+    max-width: 80vw;
+}
+
+.container--sm {
+    max-width: 70vw;
+}
+
+.header {
+    height: 100vh;
+}
+
+.header,
+.header__nav {
+    display: flex;
+    align-items: center;
+}
+
+.header__nav {
+    left: 5vw;
+    right: 5vw;
+    padding: 40px 0;
+    top: 0;
+    justify-content: space-between;
+    z-index: 99;
+}
+
+.header__nav__list li {
+    margin-left: 30px;
+}
+
+.header__nav__list li.active a {
+    text-decoration: underline;
+}
+
+.header__panel {
+    padding-top: 20px;
+    left: 10vw;
+    right: 10vw;
+    display: grid;
+    grid-gap: 20px;
+    align-items: center;
+    bottom: 0;
+}
+
+.not-full .header__panel {
+    bottom: -9.5vh;
+}
+
+.header__title {
+    transform: translateY(-20vw);
+}
+
+.addFoodForm .header__panel input {
+    transform: translateX(1.7vw);
+}
+
+.pos-header {
+    margin-top: 10vh;
+}
+
+
+/*
+* === ELEMENTS ===
+*/
+
+.btn {
+    display: inline-block;
+    cursor: pointer;
+    padding: 20px;
+}
+
+.btn.btn--full {
+    width: 100%;
+}
+
+.btn.btn--default {
+    grid-row: 1;
+    background-color: #000;
+    color: #fff;
+}
+
+.section__title {
+    margin-bottom: 10vh;
+}
+
+.food-list__item,
+.food-list__item__info,
+.food-form {
+    display: flex;
+}
+
+.food-list__item,
+.food-list__item__info {
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.food-list__item {
+    padding: 20px 0;
+    border-bottom: 1px solid #000;
+}
+
+.food-list__item:first-child {
+    padding-top: 0;
+}
+
+.food-list__item__info {
+    flex-wrap: wrap;
+}
+
+.food-list__item h3 {
+    flex: 1;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.food-list__item__info {
+    flex: 4;
+}
+
+.food-list__item__info li {
+    margin-left: 15px;
+}
+
+.food-list__item h3,
+.food-list__item__info li h4 {
+    line-height: 30px;
+}
+
+.food-form {
+    margin-bottom: 10vh;
+}
+
+.food-form select {
+    border: 1px solid #000;
+    padding-left: 20px;
+    flex: 3;
+}
+
+.food-form button {
+    flex: 1;
+}
+
+.alert {
+    position: fixed;
+    left: 50%;
+    left: 50%;
+    bottom: 0;
+    transform: translate(-50%, -50%);
+    padding: 23px;
+    text-align: center;
+    z-index: 99;
+}
+
+/*
+* === HELPERS ===
+*/
+
+.no--select {
+    user-select: none;
+    -moz-user-select: none;
+}
+
+.p--relative {
+    position: relative;
+}
+
+.p--absolute {
+    position: absolute;
+}
+
+.p--fixed {
+    position: fixed;
+}
+
+.d--block {
+    display: block;
+}
+
+.d--inlineBlock {
+    display: inline-block;
+}
+
+.d--inline {
+    display: inline;
+}
+
+[hidden],
+.d--none {
+    display: none;
+}
+
+.ff--secondary {
+    font-family: 'Monument Extended', Inpact, sans-serif;
+}
+
+.fs--normal {
+    font-size: calc(14px + (26 - 14) * ((100vw - 300px) / (1600 - 300)));
+}
+
+.fs--subtitle {
+    font-size: 6vw;
+}
+
+.fs--title {
+    font-size: 20vw;
+    font-weight: 400;
+    line-height: 1;
+}
+
+.fw--normal {
+    font-weight: 400;
+}
+
+.fw--bold {
+    font-weight: bold;
+}
+
+.c--white {
+    color: #fff;
+}
+
+.txt--center {
+    text-align: center;
+}
+
+.txt--right {
+    text-align: right;
+}
+
+.bg--white {
+    background-color: #fff;
+}
+
+.bg--dark {
+    background-color: #000;
+}
+
+.bg--green {
+    background-color: var(--green);
+}
+
+.bg--red {
+    background-color: var(--red);
+}
+
+.bg--yellow {
+    background-color: var(--yellow);
+}
+
+
+/*
+* === MEDIA QUERIES ===
+*/
+
+@media (min-width: 800px) {
+    .header__panel,
+    .header__panel .cta {
+        height: 10vw;
+        padding: 0;
+    }
+
+    .header__panel {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        left: 17.5vw;
+        right: 17.5vw;
+        bottom: 0;
+    }
+
+    .header__title {
+        transform: translateY(-1.5vw);
+    }
+
+    .pos-header {
+        margin-top: 20vh;
+    }
+
+    .section__title {
+        margin-bottom: 20vh;
+    }
+
+    .btn.cta {
+        line-height: 10.5vw;
+    }
+
+    .addFoodForm .header__panel input {
+        transform: translateX(0.7vw);
+    }
+
+    .fs--subtitle {
+        font-size: 8vw;
+    }
+}

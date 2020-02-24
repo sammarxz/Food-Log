@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#ffffff">
+    <title>{% block pageTitle %}Contador de Calorias - {% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+<body class="fs--normal">
+    {% block content %}{% endblock %}
+
+	{% with messages = get_flashed_messages() %}
+		{% if messages %}
+			{% for message in messages %}
+				<div class="alert bg--red c--white">
+					<p>{{ message }}</p>
+				</div>
+			{% endfor %}
+		{% endif %}
+	{% endwith %}
+
+    {% block script %}{% endblock %}
+	<script>
+		const alert = document.querySelector(".alert");
+
+		if (alert) {
+			setTimeout(function(){
+			    alert.classList.add("d--none")
+			}, 2000);
+		}
+	</script>
+</body>
+</html>
